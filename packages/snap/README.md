@@ -18,6 +18,7 @@ Mopsus Snap integrates BlockSec Mopsus API, realizes transaction pre-running, an
 Mopsus Snap provides the ability to check the security of transactions, thereby preventing most phishing, scams, and other behaviors that endanger users. The snap integrates the address tags of the BlockSec AML team, including Fake_Phishing addresses and scam token addresses. Specifically, the snap provides the following security check:
 - Address security check
 - Token security check 
+- Approval security check (only increaseAllowance)
 
 # Use case
 

@@ -53,7 +53,7 @@ export interface Bundle {
 export interface Sec {
   reciver: string[]
   token: string[]
-  approve: number
+  approve: string[]
 }
 
 export interface Ret {
@@ -251,10 +251,11 @@ const DashBoard: DashBoardHandler = async (
   dialog.push(divider())
 
   if ((retObj.security.token == null) &&
-    (retObj.security.reciver == null)
+    (retObj.security.reciver == null) && 
+    (retObj.security.approve == null)
   ) {
     // response.insights['Security Check: Passed'] = ''
-    dialog.push(heading('Security Check: Passed'))
+    dialog.push(heading('Security Check: Passed ✅'))
     // dialog.push(text(' '))
     // response.insights[map] = ''
     dialog.push(heading(map))
@@ -262,7 +263,7 @@ const DashBoard: DashBoardHandler = async (
     map += ' '
   } else {
     // response.insights['Security Check: Failed'] = ''
-    dialog.push(heading('Security Check: Failed'))
+    dialog.push(heading('Security Check: Failed 🚨'))
     // dialog.push(text(' '))
     // response.insights[map] = 'Be cautious! The transaction may cause you to lose money.'
     dialog.push(heading(map))
@@ -272,41 +273,61 @@ const DashBoard: DashBoardHandler = async (
 
   //Security - Reciver
   if (retObj.security.reciver != null) {
-    // response.insights[map] = " ✕ Risky Address Detection"
+    // response.insights[map] = " 🚨 Risky Address Detection"
     dialog.push(heading(map))
-    dialog.push(text('✕ Risky Address Detection'))
+    dialog.push(text('🚨 Risky Address Detection'))
     map += ' '
     for (let i of retObj.security.reciver) {
       //str += ` ${i}`
       // response.insights[map] = `-- ${i}`
       dialog.push(heading(map))
-      dialog.push(copyable(`-- ${i}`))
+      dialog.push(copyable(`${i}`))
       map += ' '
     }
   } else {
-    // response.insights[map] = ' ✓ Risky Address Detection'
+    // response.insights[map] = '✅  Risky Address Detection'
     dialog.push(heading(map))
-    dialog.push(text(' ✓ Risky Address Detection'))
+    dialog.push(text('✅  Risky Address Detection'))
     map += ' '
   }
 
   //Security - Token
   if (retObj.security.token != null) {
-    // let str: string = " ✕ Scam Token Detection"
+    // let str: string = " 🚨 Scam Token Detection"
     // response.insights[map] = str
     dialog.push(heading(map))
-    dialog.push(text(" ✕ Scam Token Detection"))
+    dialog.push(text("🚨 Scam Token Detection"))
     map += ' '
     for (let i of retObj.security.token) {
       // response.insights[map] = `-- ${i}`
       dialog.push(heading(map))
-      dialog.push(copyable(`-- ${i}`))
+      dialog.push(copyable(`${i}`))
       map += ' '
     }
   } else {
-    // response.insights[map] = ' ✓ Scam Token Detection'
+    // response.insights[map] = '✅  Scam Token Detection'
     dialog.push(heading(map))
-    dialog.push(text(' ✓ Scam Token Detection'))
+    dialog.push(text('✅  Scam Token Detection'))
+    map += ' '
+  }
+
+  //Security - Appr
+  if (retObj.security.approve != null) {
+    // let str: string = " 🚨 Scam Token Detection"
+    // response.insights[map] = str
+    dialog.push(heading(map))
+    dialog.push(text("🚨 Scam Approve Detection"))
+    map += ' '
+    for (let i of retObj.security.approve) {
+      // response.insights[map] = `-- ${i}`
+      dialog.push(heading(map))
+      dialog.push(copyable(`${i}`))
+      map += ' '
+    }
+  } else {
+    // response.insights[map] = '✅  Scam Token Detection'
+    dialog.push(heading(map))
+    dialog.push(text('✅  Scam Approve Detection'))
     map += ' '
   }
 
