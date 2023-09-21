@@ -321,7 +321,7 @@ const DashBoard: DashBoardHandler = async (
     for (let i of retObj.security.approve) {
       // response.insights[map] = `-- ${i}`
       dialog.push(heading(map))
-      dialog.push(copyable(`${i}`))
+      dialog.push(copyable(`Warining: increaseAllowance() detected. Highly likely to be a scam! ${i}`))
       map += ' '
     }
   } else {
